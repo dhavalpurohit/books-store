@@ -1,0 +1,52 @@
+.rotate-left {
+    transform: rotate(60deg);
+    height: 12rem;
+}
+
+.rotate-right {
+    transform: rotate(250deg);
+    height: 12rem;
+}
+
+.bg-primary {
+    background-color: #005f78 !important;
+}
+
+.rounded-circle {
+    width: 60px;
+    height: 60px;
+}
+
+main {
+    padding: 50px;
+}
+
+
+.custom-accordion-header button {
+    background-color: #f8f9fa;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.custom-accordion-header button:focus,
+.custom-accordion-header button:active,
+.custom-accordion-header button:focus-visible,
+.custom-accordion-header button:focus-within {
+    outline: none;
+    border: none;
+}
+
+.custom-accordion-item {
+    margin: 10px 0;
+    border: none !important;
+}
+
+.form-control {
+    height: 45px;
+}
+
+@media (max-width: 1225px) {
+    .position-relative {
+        position: relative !important;
+    }
+}

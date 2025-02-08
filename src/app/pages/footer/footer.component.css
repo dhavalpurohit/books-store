@@ -1,0 +1,10 @@
+.footer {
+    font-size: 14px;
+    border-top: 1px solid #ddd;
+
+}
+
+.footer-links a {
+    text-decoration: none;
+    font-weight: 500;
+}
