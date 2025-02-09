@@ -16,3 +16,20 @@ input[type="search"] {
 input[type="search"]::-ms-clear {
     display: none;
 }
+
+html[dir="rtl"] .searchIcon {
+    left: 10px;
+}
+
+html[dir="ltr"] .searchIcon {
+    right: 0;
+}
+
+html[dir="rtl"] .accordion-button::after {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+html[dir="ltr"] .accordion-button::after {
+    margin-left: auto;
+}
