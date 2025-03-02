@@ -35,14 +35,25 @@
             <!-- Right-side icons -->
             <div class="d-flex align-items-center">
                 <!-- User Account -->
-                <div class="d-flex flex-column align-items-center mx-3">
+                <!-- <div *ngIf="isLogin; else loggedOut" class="d-flex flex-column align-items-center mx-3">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                             stroke-width="1.5"
                             d="M5 20v-1a7 7 0 0 1 7-7v0a7 7 0 0 1 7 7v1m-7-8a4 4 0 1 0 0-8a4 4 0 0 0 0 8" />
                     </svg>
                     <span class="small">Mein Konto</span>
-                </div>
+                </div> -->
+
+                <!-- <ng-template> -->
+                <button *ngIf="isLoggedIn; else showLogin" (click)="logout()" class="btn btn-danger px-4 py-2 me-2">
+                    Logout
+                </button>
+                <ng-template #showLogin>
+                    <button (click)="openLoginModal()" class="btn btn-dark px-4 py-2 me-2">
+                        Login
+                    </button>
+                </ng-template>
+                <!-- </ng-template> -->
 
                 <!-- Language Selection -->
                 <div class="row">
@@ -56,10 +67,10 @@
                                 </svg>
                                 <span class="small">{{ selectedLanguage }}</span>
                             </button>
-                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                                 <button ngbDropdownItem (click)="changeLanguage('en')">English</button>
                                 <button ngbDropdownItem (click)="changeLanguage('de')">Deutsch</button>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

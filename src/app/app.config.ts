@@ -2,6 +2,11 @@ import { ApplicationConfig, importProvidersFrom } from "@angular/core";
 import { provideZoneChangeDetection } from "@angular/core";
 import { provideRouter } from "@angular/router";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
+
+// Import Services
+import { APIService } from "./services/api.service";
+import { UtilService } from "./services/util.service";
+
 import {
   TranslateLoader,
   TranslateModule,
@@ -18,6 +23,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    APIService,
+    UtilService,
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     importProvidersFrom(

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "books-store": {
+    "product-seller": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -11,11 +11,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/books-store",
+            "outputPath": "dist",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": ["zone.js", "@angular/localize/init"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -27,6 +27,7 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -59,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "books-store:build:production"
+              "buildTarget": "product-seller:build:production"
             },
             "development": {
-              "buildTarget": "books-store:build:development"
+              "buildTarget": "product-seller:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -88,19 +89,16 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "src/styles.css"
             ],
             "scripts": []
           }
-        },
-        "i18n": {
-          "sourceLocale": "en",
-          "locales": {
-            "hi": "src/locale/messages.hi.xlf",
-            "fr": "src/locale/messages.fr.xlf"
-          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "f8055e7a-f090-4022-b468-475dce6cb717"
   }
 }

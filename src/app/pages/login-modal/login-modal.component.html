@@ -1,0 +1,43 @@
+<div class="modal-header">
+    <h4 class="modal-title">Login</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+</div>
+<div class="modal-body">
+    <form class="row g-3" (ngSubmit)="onSubmit()">
+        <!-- Email -->
+        <div class="col-12">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"
+                [(ngModel)]="email">
+        </div>
+
+        <!-- Password -->
+        <div class="col-12 ">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group position-relative">
+                <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password" name="password"
+                    placeholder="Enter password" [(ngModel)]="password">
+                <button type="button"
+                    class="btn position-absolute end-0 top-50 translate-middle-y p-2 border-0 bg-transparent"
+                    title="eye" (click)="togglePassword()">
+                    <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="col-12">
+            <div class="alert alert-danger">{{ errorMessage }}</div>
+        </div>
+
+        <!-- Login Button -->
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-dark px-4 py-2">Speichern</button>
+        </div>
+    </form>
+</div>
+
+<!-- Register Link -->
+<div class="modal-footer text-center w-100">
+    <p>Don't have an account? <a href="#" (click)="openRegisterModal()">Register</a></p>
+</div>

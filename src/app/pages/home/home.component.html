@@ -14,12 +14,38 @@
 
         <div class="position-relative w-100 mt-3 d-flex justify-content-center align-items-center">
             <input type="search" class="form-control border border-secondary rounded px-3 py-2"
-                placeholder="EAN/ISBN eingeben" />
+                (keyup.enter)="searchProduct()" [(ngModel)]="productId" placeholder="EAN/ISBN eingeben" />
             <svg class="position-absolute top-50 searchIcon translate-middle-y me-3 text-secondary"
-                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                (click)="searchProduct()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                 <path fill="currentColor"
                     d="M20.031 20.79c.46.46 1.17-.25.71-.7l-3.75-3.76a7.9 7.9 0 0 0 2.04-5.31c0-4.39-3.57-7.96-7.96-7.96s-7.96 3.57-7.96 7.96s3.57 7.96 7.96 7.96c1.98 0 3.81-.73 5.21-1.94zM4.11 11.02c0-3.84 3.13-6.96 6.96-6.96c3.84 0 6.96 3.12 6.96 6.96s-3.12 6.96-6.96 6.96c-3.83 0-6.96-3.12-6.96-6.96" />
             </svg>
+        </div>
+        <div class="mt-4" *ngIf="productDetail?.id">
+            <div class="card shadow-sm p-3 border rounded">
+                <div class="row align-items-center">
+                    <!-- Book Image -->
+                    <div class="col-12 col-md-3 text-center">
+                        <img src="{{productDetail.image}}" alt="Book Image" class="img-fluid rounded" />
+                    </div>
+
+                    <!-- Book Details -->
+                    <div class="col-12 col-md-6">
+                        <h5 class="fw-bold">{{productDetail.title}}</h5>
+                        <p class="mb-1"><strong>Author:</strong> {{productDetail.author}}</p>
+                        <p class="mb-1"><strong>ISBN:</strong> {{productDetail.id}}</p>
+                    </div>
+
+                    <!-- Price & Button -->
+                    <div class="col-12 col-md-3 text-center">
+                        <div class="p-3 shadow rounded bg-white">
+                            <p class="mb-3 text-secondary">User Angebot</p>
+                            <h4 class="fw-bold">$7.15</h4>
+                        </div>
+                        <button class="btn btn-warning mt-4">Aus Marktplze Löschen</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="mt-4">
             <div class="card shadow-sm p-3 border rounded">
