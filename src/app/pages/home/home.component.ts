@@ -77,4 +77,23 @@ export class HomeComponent {
         throw error;
       });
   }
+
+  offerUpdate() {
+    this.apiService
+      .httpPostRequest(apiEndpoint.OFFER_UPDATE, {
+        gtin: `${this.productDetail?.id}`,
+        seller: "john.smith@gmail.com",
+        state: "marketplace",
+      })
+      .then((res: any) => {
+        console.log("res ", res);
+        if (res?.statusCode == 200) {
+          this.loadOffers();
+        }
+      })
+      .catch((error: any) => {
+        console.error(error);
+        throw error;
+      });
+  }
 }

@@ -45,11 +45,11 @@
                 </div> -->
 
                 <!-- <ng-template> -->
-                <button *ngIf="isLoggedIn; else showLogin" (click)="logout()" class="btn btn-danger px-4 py-2 me-2">
+                <button *ngIf="isLoggedIn; else showLogin" (click)="logout()" class="btn btn-danger px-4 py-2 mx-2">
                     Logout
                 </button>
                 <ng-template #showLogin>
-                    <button (click)="openLoginModal()" class="btn btn-dark px-4 py-2 me-2">
+                    <button (click)="openLoginModal()" class="btn btn-dark px-4 py-2 mx-2">
                         Login
                     </button>
                 </ng-template>
@@ -67,10 +67,10 @@
                                 </svg>
                                 <span class="small">{{ selectedLanguage }}</span>
                             </button>
-                            <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                                 <button ngbDropdownItem (click)="changeLanguage('en')">English</button>
                                 <button ngbDropdownItem (click)="changeLanguage('de')">Deutsch</button>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
