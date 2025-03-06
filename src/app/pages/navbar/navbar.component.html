@@ -7,21 +7,22 @@
                             viewBox="0 0 24 24">
                             <path fill="currentColor"
                                 d="m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z" />
-                        </svg></span> Lorem ipsum dolor sit amet consectetur.
+                        </svg></span>
+                    {{ 'HEADER_1' | translate }}
                 </div>
                 <div class="col-12 col-sm-6 col-md-4 d-flex align-items-center justify-content-center mb-2">
                     <span class="text-dark me-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24">
                             <path fill="currentColor"
                                 d="m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z" />
-                        </svg></span> Lorem ipsum dolor sit amet consectetur.
+                        </svg></span> {{ 'HEADER_2' | translate }}
                 </div>
                 <div class="col-12 col-sm-6 col-md-4 d-flex align-items-center justify-content-center mb-2">
                     <span class="text-dark me-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             viewBox="0 0 24 24">
                             <path fill="currentColor"
                                 d="m9.55 15.15l8.475-8.475q.3-.3.7-.3t.7.3t.3.713t-.3.712l-9.175 9.2q-.3.3-.7.3t-.7-.3L4.55 13q-.3-.3-.288-.712t.313-.713t.713-.3t.712.3z" />
-                        </svg></span> Lorem ipsum dolor sit amet consectetur.
+                        </svg></span> {{ 'HEADER_3' | translate }}
                 </div>
             </div>
         </div>
@@ -45,12 +46,12 @@
                 </div> -->
 
                 <!-- <ng-template> -->
-                <button *ngIf="isLoggedIn; else showLogin" (click)="logout()" class="btn btn-danger px-4 py-2 mx-2">
-                    Logout
+                <button *ngIf="isLoggedIn; else showLogin" (click)="authService.logout()" class="btn btn-danger px-4 py-2 mx-2">
+                    {{ 'LOGOUT' | translate }}
                 </button>
                 <ng-template #showLogin>
                     <button (click)="openLoginModal()" class="btn btn-dark px-4 py-2 mx-2">
-                        Login
+                        {{ 'LOGIN' | translate }}
                     </button>
                 </ng-template>
                 <!-- </ng-template> -->
@@ -68,8 +69,9 @@
                                 <span class="small">{{ selectedLanguage }}</span>
                             </button>
                             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                <button ngbDropdownItem (click)="changeLanguage('en')">English</button>
-                                <button ngbDropdownItem (click)="changeLanguage('de')">Deutsch</button>
+                                <button ngbDropdownItem (click)="changeLanguage(language.code)" *ngFor="let language of languages">
+                                    {{ language.name }}
+                                </button>
                             </div>
                         </div>
                     </div>

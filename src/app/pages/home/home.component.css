@@ -21,7 +21,6 @@ main {
     padding: 50px;
 }
 
-
 .custom-accordion-header button {
     background-color: #f8f9fa;
     font-size: 18px;
@@ -45,7 +44,10 @@ main {
     height: 45px;
 }
 
-
+.sales_section div img {
+    width: 280px;
+    height: auto;
+}
 
 @media (max-width: 1225px) {
     .position-relative {

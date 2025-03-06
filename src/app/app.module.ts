@@ -38,4 +38,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent, NavbarComponent],
 })
-export class AppModule {}
+export class AppModule { }

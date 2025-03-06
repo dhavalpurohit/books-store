@@ -10,9 +10,9 @@
     <!-- Center Content -->
     <div class="d-flex flex-column justify-content-center align-items-center position-relative z-3"
         style="max-width: 800px;">
-        <h1 class="fs-1 fw-semibold text-center ">Lorem ipsum dolor sit amet consectetur velit.</h1>
+        <h1 class="fs-1 fw-semibold text-center ">{{ 'SEARCH_TITLE' | translate }}</h1>
 
-        <div class="position-relative w-100 mt-3 d-flex justify-content-center align-items-center">
+        <div class="position-relative w-100 mt-3 d-flex justify-content-end align-items-center">
             <input type="search" class="form-control border border-secondary rounded px-3 py-2"
                 (keyup.enter)="searchProduct()" [(ngModel)]="productId" placeholder="EAN/ISBN eingeben" />
             <svg class="position-absolute top-50 searchIcon translate-middle-y me-3 text-secondary"
@@ -26,55 +26,36 @@
                 <div class="row align-items-center">
                     <!-- Book Image -->
                     <div class="col-12 col-md-3 text-center">
-                        <img src="{{productDetail.image}}" alt="Book Image" class="img-fluid rounded" />
+                        <img [src]="productDetail.image || 'assets/book_not_found.jpg'"
+                            (error)="setDefaultImage($event)" alt="Book Image" class="img-fluid rounded" />
                     </div>
 
                     <!-- Book Details -->
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-5">
                         <h5 class="fw-bold">{{productDetail.title}}</h5>
-                        <p class="mb-1"><strong>Author:</strong> {{productDetail.author}}</p>
-                        <p class="mb-1"><strong>ISBN:</strong> {{productDetail.id}}</p>
+                        <p class="mb-1"><strong>Author:</strong>{{productDetail.author}}</p>
+                        <p class="mb-1"><strong>ISBN:</strong>{{productDetail.id}}</p>
                     </div>
 
                     <!-- Price & Button -->
-                    <div class="col-12 col-md-3 text-center">
+                    <div class="col-12 col-md-4 text-center">
                         <div class="p-3 shadow rounded bg-white">
                             <p class="mb-3 text-secondary">User Angebot</p>
-                            <h4 class="fw-bold">$7.15</h4>
+                            <h4 class="fw-bold">{{productDetail.price}}&euro;</h4>
                         </div>
-                        <button (click)="offerUpdate()" class="btn btn-warning mt-4">Aus Marktplze Löschen</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mt-4">
-            <div class="card shadow-sm p-3 border rounded">
-                <div class="row align-items-center">
-                    <!-- Book Image -->
-                    <div class="col-12 col-md-3 text-center">
-                        <img src="assets/1.png" alt="Book Image" class="img-fluid rounded" />
-                    </div>
-
-                    <!-- Book Details -->
-                    <div class="col-12 col-md-6">
-                        <h5 class="fw-bold">Das Ende Der Raslosigkeir</h5>
-                        <p class="mb-1"><strong>Author:</strong> John Mark Corner</p>
-                        <p class="mb-1"><strong>ISBN:</strong> 9645789625</p>
-                    </div>
-
-                    <!-- Price & Button -->
-                    <div class="col-12 col-md-3 text-center">
-                        <div class="p-3 shadow rounded bg-white">
-                            <p class="mb-3 text-secondary">User Angebot</p>
-                            <h4 class="fw-bold">$7.15</h4>
+                        <div class="form-check my-4 text-start">
+                            <input class="form-check-input" type="checkbox" value="" id="confirmation_check">
+                            <label class="form-check-label" for="confirmation_check">
+                                {{ 'CONFIRM_ITEM_CONDITION' | translate }}
+                            </label>
                         </div>
-                        <button class="btn btn-warning mt-4">Aus Marktplze Löschen</button>
+                        <button (click)="offerUpdate()" class="btn btn-warning  rounded-pill"
+                            style="min-width: max-content;">Aus Marktplze Löschen</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 
     <!-- Rotated Image (Right) -->
     <div class="position-absolute top-20 z-1 d-none d-md-block" style="right: 50px;">
@@ -82,9 +63,8 @@
     </div>
 </main>
 
-
 <section class="d-flex flex-column justify-content-center" style="margin-top: 80px;">
-    <h2 class="text-center text-capitalize fw-semibold fs-4">so einfach geht verkaufen</h2>
+    <h2 class="text-center text-capitalize fw-semibold fs-4">{{ 'SERVICE_TITLE' | translate }}</h2>
 
     <div class="container mt-4">
         <div class="row gy-4 text-center">
@@ -97,9 +77,8 @@
                                 d="M20.031 20.79c.46.46 1.17-.25.71-.7l-3.75-3.76a7.9 7.9 0 0 0 2.04-5.31c0-4.39-3.57-7.96-7.96-7.96s-7.96 3.57-7.96 7.96s3.57 7.96 7.96 7.96c1.98 0 3.81-.73 5.21-1.94zM4.11 11.02c0-3.84 3.13-6.96 6.96-6.96c3.84 0 6.96 3.12 6.96 6.96s-3.12 6.96-6.96 6.96c-3.83 0-6.96-3.12-6.96-6.96" />
                         </svg>
                     </p>
-                    <h4 class="fs-5 fw-semibold mt-2">1. Dein Angebot</h4>
-                    <p class="text-secondary px-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, error.
-                    </p>
+                    <h4 class="fs-5 fw-semibold mt-2">{{ 'SERVICE_HEADING_1' | translate }}</h4>
+                    <p class="text-secondary px-3">{{ 'SERVICE_DESCRIPTION_1' | translate }}</p>
                 </div>
             </div>
             <div class="col-12 col-md-4">
@@ -115,9 +94,8 @@
                             </g>
                         </svg>
                     </p>
-                    <h4 class="fs-5 fw-semibold mt-2">2. Dein Angebot</h4>
-                    <p class="text-secondary px-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, error.
-                    </p>
+                    <h4 class="fs-5 fw-semibold mt-2">{{ 'SERVICE_HEADING_2' | translate }}</h4>
+                    <p class="text-secondary px-3">{{ 'SERVICE_DESCRIPTION_2' | translate }}</p>
                 </div>
             </div>
             <div class="col-12 col-md-4">
@@ -130,16 +108,13 @@
                                 d="M5 9V6.8c0-.44.36-.8.8-.8h16.4c.44 0 .8.36.8.8v8.4c0 .44-.36.8-.8.8H20M2.8 9h16.4a.8.8 0 0 1 .8.8v8.4a.8.8 0 0 1-.8.8H2.8a.8.8 0 0 1-.8-.8V9.8a.8.8 0 0 1 .8-.8Zm9.2 5a1 1 0 1 1-2 0a1 1 0 0 1 2 0Z" />
                         </svg>
                     </p>
-                    <h4 class="fs-5 fw-semibold mt-2">3. Dein Angebot</h4>
-                    <p class="text-secondary px-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, error.
-                    </p>
+                    <h4 class="fs-5 fw-semibold mt-2">{{ 'SERVICE_HEADING_3' | translate }}</h4>
+                    <p class="text-secondary px-3">{{ 'SERVICE_DESCRIPTION_3' | translate }}</p>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
-
 
 <section class="container  mx-auto" style="margin-top: 80px;">
     <div ngbAccordion>
@@ -150,24 +125,12 @@
                         <path fill="currentColor"
                             d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6" />
                     </svg>
-                    <span class="ms-2">wie errechnet sich user Ankaufspreis?</span>
+                    <span class="ms-2">{{ 'FAQ_HEADING_1' | translate }}</span>
                 </button>
             </h2>
             <div ngbAccordionCollapse>
                 <div ngbAccordionBody>
-                    <ng-template>
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                        3 wolf moon
-                        officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-                        Brunch 3 wolf
-                        moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch
-                        et. Nihil anim
-                        keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan
-                        excepteur
-                        butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth
-                        nesciunt you probably
-                        haven't heard of them accusamus labore sustainable VHS.
-                    </ng-template>
+                    <ng-template>{{ 'FAQ_DESCRIPTION_1' | translate }}</ng-template>
                 </div>
             </div>
         </div>
@@ -178,24 +141,12 @@
                         <path fill="currentColor"
                             d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6" />
                     </svg>
-                    <span class="ms-2">wie errechnet sich user Ankaufspreis?</span>
+                    <span class="ms-2">{{ 'FAQ_HEADING_2' | translate }}</span>
                 </button>
             </h2>
             <div ngbAccordionCollapse>
                 <div ngbAccordionBody>
-                    <ng-template>
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                        3 wolf moon
-                        officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-                        Brunch 3 wolf
-                        moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch
-                        et. Nihil anim
-                        keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan
-                        excepteur
-                        butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth
-                        nesciunt you probably
-                        haven't heard of them accusamus labore sustainable VHS.
-                    </ng-template>
+                    <ng-template>{{ 'FAQ_DESCRIPTION_2' | translate }}</ng-template>
                 </div>
             </div>
         </div>
@@ -206,284 +157,66 @@
                         <path fill="currentColor"
                             d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6" />
                     </svg>
-                    <span class="ms-2">wie errechnet sich user Ankaufspreis?</span>
+                    <span class="ms-2">{{ 'FAQ_HEADING_3' | translate }}</span>
                 </button>
             </h2>
             <div ngbAccordionCollapse>
                 <div ngbAccordionBody>
-                    <ng-template>
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                        3 wolf moon
-                        officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-                        Brunch 3 wolf
-                        moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch
-                        et. Nihil anim
-                        keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan
-                        excepteur
-                        butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth
-                        nesciunt you probably
-                        haven't heard of them accusamus labore sustainable VHS.
-                    </ng-template>
+                    <ng-template>{{ 'FAQ_DESCRIPTION_3' | translate }}</ng-template>
+                </div>
+            </div>
+        </div>
+        <div ngbAccordionItem class="custom-accordion-item">
+            <h2 ngbAccordionHeader class="custom-accordion-header">
+                <button ngbAccordionButton>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
+                        <path fill="currentColor"
+                            d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6" />
+                    </svg>
+                    <span class="ms-2">{{ 'FAQ_HEADING_4' | translate }}</span>
+                </button>
+            </h2>
+            <div ngbAccordionCollapse>
+                <div ngbAccordionBody>
+                    <ng-template>{{ 'FAQ_DESCRIPTION_4' | translate }}</ng-template>
                 </div>
             </div>
         </div>
     </div>
-    <!-- <div class="flex gap-4 w-full md:w-1/2 rounded-md bg-gray-200 items-center justify-start p-2 sm:p-5">
-        <p class="">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
-                <path fill="currentColor"
-                    d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6" />
-            </svg>
-        </p>
-        <p class="capitalize font-semibold text-xs sm:text-lg">wie errechnet sich user Ankaufspreis?</p>
-    </div>
-    <div class="flex gap-4 w-full md:w-1/2 rounded-md bg-gray-200 items-center justify-start p-2 sm:p-5">
-        <p class="">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
-                <path fill="currentColor"
-                    d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6" />
-            </svg>
-        </p>
-        <p class="capitalize font-semibold text-xs sm:text-lg">wie errechnet sich user Ankaufspreis?</p>
-    </div>
-    <div class="flex gap-4 w-full md:w-1/2 rounded-md bg-gray-200 items-center justify-start p-2 sm:p-5">
-        <p class="">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
-                <path fill="currentColor"
-                    d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6" />
-            </svg>
-        </p>
-        <p class="capitalize font-semibold text-xs sm:text-lg">wie errechnet sich user Ankaufspreis?</p>
-    </div>
-    <div class="flex gap-4 w-full md:w-1/2 rounded-md bg-gray-200 items-center justify-start p-2 sm:p-5">
-        <p class="">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
-                <path fill="currentColor"
-                    d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6" />
-            </svg>
-        </p>
-        <p class="capitalize font-semibold text-xs sm:text-lg">wie errechnet sich user Ankaufspreis?</p>
-    </div>
-    <div class="flex gap-4 w-full md:w-1/2 rounded-md bg-gray-200 items-center justify-start p-2 sm:p-5">
-        <p class="">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
-                <path fill="currentColor"
-                    d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6" />
-            </svg>
-        </p>
-        <p class="capitalize font-semibold text-xs sm:text-lg">wie errechnet sich user Ankaufspreis?</p>
-    </div>
-    <div class="flex gap-4 w-full md:w-1/2 rounded-md bg-gray-200 items-center justify-start p-2 sm:p-5">
-        <p class="">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
-                <path fill="currentColor"
-                    d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6" />
-            </svg>
-        </p>
-        <p class="capitalize font-semibold text-xs sm:text-lg">wie errechnet sich user Ankaufspreis?</p>
-    </div>
-    <div class="flex gap-4 w-full md:w-1/2 rounded-md bg-gray-200 items-center justify-start p-2 sm:p-5">
-        <p class="">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
-                <path fill="currentColor"
-                    d="M222 128a6 6 0 0 1-6 6h-82v82a6 6 0 0 1-12 0v-82H40a6 6 0 0 1 0-12h82V40a6 6 0 0 1 12 0v82h82a6 6 0 0 1 6 6" />
-            </svg>
-        </p>
-        <p class="capitalize font-semibold text-xs sm:text-lg">wie errechnet sich user Ankaufspreis?</p>
-    </div> -->
 </section>
 
-<section class="container" style="margin-top: 80px;">
-    <h3 class="capitalize text-2xl font-semibold">Our Services</h3>
+<section class="container sales_section" style="margin-top: 80px" *ngIf="offers?.length">
+    <h3 class="capitalize text-2xl font-semibold">{{ 'SALES_TITLE' | translate }}</h3>
     <div class="mt-4">
-        <div class="card shadow-sm p-3 border rounded">
+        <div class="card shadow-sm p-3 border rounded mb-4" *ngFor="let offer of offers">
             <div class="row align-items-center">
                 <!-- Book Image -->
                 <div class="col-12 col-md-3 text-center">
-                    <img src="assets/1.png" alt="Book Image" class="img-fluid rounded" />
+                    <!-- <img src="{{ offer.image }}" alt="Book Image" class="img-fluid rounded" /> -->
+                    <img [src]="offer.image || 'assets/book_not_found.jpg'" (error)="setDefaultImage($event)"
+                        alt="Book Image" class="img-fluid rounded" />
                 </div>
 
                 <!-- Book Details -->
                 <div class="col-12 col-md-6">
-                    <h5 class="fw-bold">Das Ende Der Raslosigkeir</h5>
-                    <p class="mb-1"><strong>Author:</strong> John Mark Corner</p>
-                    <p class="mb-1"><strong>ISBN:</strong> 9645789625</p>
+                    <h5 class="fw-bold">{{ offer.title }}</h5>
+                    <p class="mb-1"><strong>Author:</strong>{{ offer.author }}</p>
+                    <p class="mb-1"><strong>ISBN:</strong>{{ offer.productId }}</p>
                 </div>
 
                 <!-- Price & Button -->
                 <div class="col-12 col-md-3 text-center">
                     <div class="p-3 shadow rounded bg-white">
-                        <p class="mb-3 text-secondary">User Angebot</p>
-                        <h4 class="fw-bold">$7.15</h4>
+                        <p class="mb-3 text-secondary">{{ 'OUR_PRICE' | translate }}</p>
+                        <h4 class="fw-bold">{{ offer.price }}&euro;</h4>
                     </div>
-                    <button class="btn btn-warning mt-4">Aus Marktplze Löschen</button>
+                    <button class="btn btn-warning mt-4" [ngClass]="{
+                        'sold_color': offer.state === 'sold',
+                        'deleted_color': offer.state === 'deleted',
+                        'marketplace_color': offer.state === 'marketplace'
+                    }">{{ offer.state }}</button>
                 </div>
             </div>
         </div>
     </div>
-    <div class="mt-4">
-        <div class="card shadow-sm p-3 border rounded">
-            <div class="row align-items-center">
-                <!-- Book Image -->
-                <div class="col-12 col-md-3 text-center">
-                    <img src="assets/1.png" alt="Book Image" class="img-fluid rounded" />
-                </div>
-
-                <!-- Book Details -->
-                <div class="col-12 col-md-6">
-                    <h5 class="fw-bold">Das Ende Der Raslosigkeir</h5>
-                    <p class="mb-1"><strong>Author:</strong> John Mark Corner</p>
-                    <p class="mb-1"><strong>ISBN:</strong> 9645789625</p>
-                </div>
-
-                <!-- Price & Button -->
-                <div class="col-12 col-md-3 text-center">
-                    <div class="p-3 shadow rounded bg-white">
-                        <p class="mb-3 text-secondary">User Angebot</p>
-                        <h4 class="fw-bold">$7.15</h4>
-                    </div>
-                    <button class="btn btn-warning mt-4">Aus Marktplze Löschen</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="mt-4">
-        <div class="card shadow-sm p-3 border rounded">
-            <div class="row align-items-center">
-                <!-- Book Image -->
-                <div class="col-12 col-md-3 text-center">
-                    <img src="assets/1.png" alt="Book Image" class="img-fluid rounded" />
-                </div>
-
-                <!-- Book Details -->
-                <div class="col-12 col-md-6">
-                    <h5 class="fw-bold">Das Ende Der Raslosigkeir</h5>
-                    <p class="mb-1"><strong>Author:</strong> John Mark Corner</p>
-                    <p class="mb-1"><strong>ISBN:</strong> 9645789625</p>
-                </div>
-
-                <!-- Price & Button -->
-                <div class="col-12 col-md-3 text-center">
-                    <div class="p-3 shadow rounded bg-white">
-                        <p class="mb-3 text-secondary">User Angebot</p>
-                        <h4 class="fw-bold">$7.15</h4>
-                    </div>
-                    <button class="btn btn-warning mt-4">Aus Marktplze Löschen</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- <div class="flex flex-col gap-5 justify-center items-center mt-10">
-        <div
-            class="flex items-center justify-center gap-20 border border-gray-200 rounded-lg p-5 max-md:flex-col max-sm:w-full">
-            <div class="flex gap-5 max-sm:flex-col ">
-                <img src="assets/1.png" alt="2" class="w-52 h-52 object-contain" />
-                <div class="flex flex-col items-start max-sm:items-center justify-center gap-3">
-                    <h4 class="capitalize text-lg font-semibold">das ende der raslosigkeir</h4>
-                    <p class="capitalize text-sm text-gray-500">author: john mark corner</p>
-                    <p class="text-sm text-gray-500">ISBN: 9645789625</p>
-                </div>
-            </div>
-            <div class="flex flex-col">
-                <div class="flex flex-col items-center justify-center gap-5 p-5 rounded-lg shadow-2xl">
-                    <h5 class="capitalize text-md text-center">user angebot</h5>
-                    <p class="text-2xl font-semibold">7,15$</p>
-                </div>
-                <button class="rounded-full w-fit bg-yellow-500 px-5 py-1 capitalize mt-5">auz marktplze
-                    loschen</button>
-            </div>
-        </div>
-
-        <div
-            class="flex items-center justify-center gap-20 border border-gray-200 rounded-lg p-5 max-md:flex-col max-sm:w-full">
-            <div class="flex gap-5 max-sm:flex-col ">
-                <img src="assets/1.png" alt="2" class="w-52 h-52 object-contain" />
-                <div class="flex flex-col items-start max-sm:items-center justify-center gap-3">
-                    <h4 class="capitalize text-lg font-semibold">das ende der raslosigkeir</h4>
-                    <p class="capitalize text-sm text-gray-500">author: john mark corner</p>
-                    <p class="text-sm text-gray-500">ISBN: 9645789625</p>
-                </div>
-            </div>
-            <div class="flex flex-col">
-                <div class="flex flex-col items-center justify-center gap-5 p-5 rounded-lg shadow-2xl">
-                    <h5 class="capitalize text-md text-center">user angebot</h5>
-                    <p class="text-2xl font-semibold">7,15$</p>
-                </div>
-                <button class="rounded-full w-fit bg-yellow-500 px-5 py-1 capitalize mt-5">auz marktplze
-                    loschen</button>
-            </div>
-        </div>
-        <div
-            class="flex items-center justify-center gap-20 border border-gray-200 rounded-lg p-5 max-md:flex-col max-sm:w-full">
-            <div class="flex gap-5 max-sm:flex-col ">
-                <img src="assets/1.png" alt="2" class="w-52 h-52 object-contain" />
-                <div class="flex flex-col items-start max-sm:items-center justify-center gap-3">
-                    <h4 class="capitalize text-lg font-semibold">das ende der raslosigkeir</h4>
-                    <p class="capitalize text-sm text-gray-500">author: john mark corner</p>
-                    <p class="text-sm text-gray-500">ISBN: 9645789625</p>
-                </div>
-            </div>
-            <div class="flex flex-col">
-                <div class="flex flex-col items-center justify-center gap-5 p-5 rounded-lg shadow-2xl">
-                    <h5 class="capitalize text-md text-center">user angebot</h5>
-                    <p class="text-2xl font-semibold">7,15$</p>
-                </div>
-                <button class="rounded-full w-fit bg-yellow-500 px-5 py-1 capitalize mt-5">auz marktplze
-                    loschen</button>
-            </div>
-        </div>
-    </div> -->
 </section>
-
-
-<div class="container mt-5" style="margin-top: 80px; padding-bottom: 80px;">
-    <h2 class="fw-bold">Herzlich willkommen Florentin in deinem persönlichen Konto.</h2>
-    <div class="text-end">
-        <a href="#" class="text-dark">Abmelden</a>
-    </div>
-
-    <h4 class="mt-4 fw-semibold">Persönliche Daten</h4>
-    <p class="fw-semibold">Daten ändern</p>
-
-    <form class="row g-3">
-        <!-- First Name -->
-        <div class="col-12">
-            <label for="firstName" class="form-label">Vorname</label>
-            <input type="text" class="form-control" id="firstName" placeholder="Florentin">
-        </div>
-
-        <!-- Last Name -->
-        <div class="col-12">
-            <label for="lastName" class="form-label">Nachname</label>
-            <input type="text" class="form-control" id="lastName" placeholder="Fischer">
-        </div>
-
-        <!-- IBAN -->
-        <div class="col-12">
-            <input type="text" class="form-control" id="iban" placeholder="IBAN (Bankkonto)">
-        </div>
-
-        <!-- PLZ & Ort -->
-        <div class="col-12">
-            <input type="text" class="form-control" id="plz" placeholder="PLZ und Ort">
-        </div>
-
-        <!-- Save Button -->
-        <div class="col-12 text-center">
-            <button type="submit" class="btn btn-dark px-4 py-2">Speichern</button>
-        </div>
-    </form>
-</div>
-
-<!-- 
-<section class="mt-20 px-5 md:px-30">
-    <h2 class="capitalize text-2xl font-semibold">contact us</h2>
-    <form class="flex flex-col gap-5 px-5 md:px-10 mt-10 w-full md:w-4/5">
-        <input class="rounded-md border-2 border-gray-200 p-3" type="text" placeholder="First Name" />
-        <input class="rounded-md border-2 border-gray-200 p-3" type="text" placeholder="Last Name" />
-        <input class="rounded-md border-2 border-gray-200 p-3" type="email" placeholder="Email" />
-        <input class="rounded-md border-2 border-gray-200 p-3" type="number" placeholder="Mobile no/" />
-        <button class="px-5 py-2 rounded-full bg-cyan-800 text-white w-fit ml-auto" type="button">Submit</button>
-    </form>
-</section> -->

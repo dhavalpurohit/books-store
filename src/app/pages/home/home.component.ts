@@ -2,98 +2,74 @@ import { Component } from "@angular/core";
 import { NgbAccordionModule } from "@ng-bootstrap/ng-bootstrap";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
-import { ProductService } from "../../services/product.service";
-
-// Import services
 import { APIService } from "../../services/api.service";
 import { apiEndpoint } from "../../config";
+import { TranslateModule } from "@ngx-translate/core";
 
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
   styleUrl: "./home.component.css",
-  imports: [NgbAccordionModule, FormsModule, CommonModule],
+  imports: [NgbAccordionModule, FormsModule, CommonModule, TranslateModule],
 })
 export class HomeComponent {
   public productId: string = "";
   public productDetail: any = {};
   public offers: any[] = [];
 
-  steps = [
-    {
-      title: "1. Dein Angebot",
-      description: "Lorem ipsum dolor sit amet consectetur.",
-      icon: "search",
-    },
-    {
-      title: "2. Verpackung",
-      description: "Lorem ipsum dolor sit amet consectetur.",
-      icon: "box",
-    },
-    {
-      title: "3. Zahlung",
-      description: "Lorem ipsum dolor sit amet consectetur.",
-      icon: "card",
-    },
-  ];
-
-  constructor(
-    private apiService: APIService,
-    private productService: ProductService
-  ) {}
+  constructor(private apiService: APIService) { }
 
   ngOnInit() {
-    this.loadOffers();
+    this.getOffers();
   }
 
-  loadOffers() {
-    this.productService.getOffers().subscribe({
-      next: (response) => {
-        console.log("loadOffers", response);
-        this.offers = response.data;
-      },
-      error: (error) => {
-        console.error("Error fetching offers:", error);
-      },
+  setDefaultImage(event: Event) {
+    (event.target as HTMLImageElement).src = 'assets/book_not_found.jpg';
+  }
+  
+  getOffers() {
+    this.apiService.httpGetRequest(apiEndpoint.OFFER_GET_ALL).then((res: any) => {
+      console.log("res ", res);
+      if (res?.statusCode == 200 && res?.payload?.offers) {
+        this.offers = res?.payload?.offers;
+      }
+      console.log("this.productDetail : ", this.productDetail);
+    }).catch((error: any) => {
+      console.error(error);
+      throw error;
     });
   }
 
   searchProduct() {
     this.productDetail = {};
     console.log("searchProduct : ", this.productId);
-    this.apiService
-      .httpPostRequest(apiEndpoint.GET_PRODUCT, {
-        id: this.productId,
-      })
-      .then((res: any) => {
-        console.log("res ", res);
-        if (res?.statusCode == 200 && res?.response?.productData) {
-          this.productDetail = res?.response?.productData;
-        }
-        console.log("this.productDetail : ", this.productDetail);
-      })
-      .catch((error: any) => {
-        console.error(error);
-        throw error;
-      });
+    this.apiService.httpPostRequest(apiEndpoint.PRODUCT_GET, {
+      id: this.productId,
+    }).then((res: any) => {
+      console.log("res ", res);
+      if (res?.statusCode == 200 && res?.payload?.productData) {
+        this.productDetail = res?.payload?.productData;
+      }
+      console.log("this.productDetail : ", this.productDetail);
+    }).catch((error: any) => {
+      console.error(error);
+      throw error;
+    });
   }
 
   offerUpdate() {
-    this.apiService
-      .httpPostRequest(apiEndpoint.OFFER_UPDATE, {
-        gtin: `${this.productDetail?.id}`,
-        seller: "john.smith@gmail.com",
-        state: "marketplace",
-      })
-      .then((res: any) => {
-        console.log("res ", res);
-        if (res?.statusCode == 200) {
-          this.loadOffers();
-        }
-      })
-      .catch((error: any) => {
-        console.error(error);
-        throw error;
-      });
+    this.apiService.httpPostRequest(apiEndpoint.OFFER_UPDATE, {
+      gtin: `${this.productDetail?.id}`,
+      state: "marketplace",
+    }).then((res: any) => {
+      console.log("res ", res);
+      if (res?.statusCode == 200) {
+        this.getOffers();
+        this.productDetail = {};
+      }
+    }).catch((error: any) => {
+      console.error(error);
+      throw error;
+    });
   }
 }

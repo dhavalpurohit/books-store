@@ -33,3 +33,34 @@ html[dir="rtl"] .accordion-button::after {
 html[dir="ltr"] .accordion-button::after {
     margin-left: auto;
 }
+
+.sold_color {
+    background-color: #00B050;
+    border-color: #00B050;
+}
+
+.sold_color:hover {
+    background-color: #00B050;
+    border-color: #00B050;
+}
+
+.deleted_color {
+    background-color: #FF0000;
+    border-color: #FF0000;
+}
+
+
+.deleted_color:hover {
+    background-color: #FF0000;
+    border-color: #FF0000;
+}
+
+.marketplace_color {
+    background-color: #F6B735;
+    border-color: #F6B735;
+}
+
+.marketplace_color:hover {
+    background-color: #F6B735;
+    border-color: #F6B735;
+}

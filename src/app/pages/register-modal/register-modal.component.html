@@ -6,24 +6,24 @@
     <form class="row g-3" (ngSubmit)="onRegister()">
         <!-- Email -->
         <div class="col-12">
-            <label for="name" class="form-label">User Name</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name"
+            <label for="name" class="form-label">{{ 'NAME' | translate }}</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="{{ 'ENTER_NAME' | translate }}"
                 [(ngModel)]="name">
         </div>
 
         <!-- Email -->
         <div class="col-12">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"
-                [(ngModel)]="email">
+            <label for="email" class="form-label">{{ 'EMAIL' | translate }}</label>
+            <input type="email" class="form-control" id="email" name="email"
+                placeholder="{{ 'ENTER_EMAIL' | translate }}" [(ngModel)]="email">
         </div>
 
         <!-- Password -->
         <div class="col-12 ">
-            <label for="password" class="form-label">Password</label>
+            <label for="password" class="form-label">{{ 'PASSWORD' | translate }}</label>
             <div class="input-group position-relative">
                 <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password" name="password"
-                    placeholder="Enter password" [(ngModel)]="password">
+                    placeholder="{{ 'ENTER_PASSWORD' | translate }}" [(ngModel)]="password">
                 <button type="button"
                     class="btn position-absolute end-0 top-50 translate-middle-y p-2 border-0 bg-transparent"
                     title="eye" (click)="togglePassword()">
@@ -37,10 +37,9 @@
             <div class="alert alert-danger">{{ errorMessage }}</div>
         </div>
 
-
         <!-- Register Button -->
         <div class="col-12 text-center">
-            <button type="submit" class="btn btn-dark px-4 py-2">Register</button>
+            <button type="submit" class="btn btn-dark px-4 py-2">{{ 'REGISTER' | translate }}</button>
         </div>
     </form>
 </div>

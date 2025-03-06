@@ -5,7 +5,7 @@ import { HttpClientModule, HttpClient } from "@angular/common/http";
 
 // Import Services
 import { APIService } from "./services/api.service";
-import { UtilService } from "./services/util.service";
+import { AuthService } from "./services/auth.service";
 
 import {
   TranslateLoader,
@@ -24,7 +24,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 export const appConfig: ApplicationConfig = {
   providers: [
     APIService,
-    UtilService,
+    AuthService,
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     importProvidersFrom(

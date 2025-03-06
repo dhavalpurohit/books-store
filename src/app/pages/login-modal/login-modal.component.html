@@ -7,8 +7,8 @@
         <!-- Email -->
         <div class="col-12">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"
-                [(ngModel)]="email">
+            <input type="email" class="form-control" id="email" name="email"
+                placeholder="{{ 'ENTER_EMAIL' | translate }}" [(ngModel)]="email">
         </div>
 
         <!-- Password -->
@@ -16,7 +16,7 @@
             <label for="password" class="form-label">Password</label>
             <div class="input-group position-relative">
                 <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password" name="password"
-                    placeholder="Enter password" [(ngModel)]="password">
+                    placeholder="{{ 'ENTER_PASSWORD' | translate }}" [(ngModel)]="password">
                 <button type="button"
                     class="btn position-absolute end-0 top-50 translate-middle-y p-2 border-0 bg-transparent"
                     title="eye" (click)="togglePassword()">
@@ -32,12 +32,15 @@
 
         <!-- Login Button -->
         <div class="col-12 text-center">
-            <button type="submit" class="btn btn-dark px-4 py-2">Speichern</button>
+            <button type="submit" class="btn btn-dark px-4 py-2">{{ 'LOGIN' | translate }}</button>
         </div>
     </form>
 </div>
 
 <!-- Register Link -->
 <div class="modal-footer text-center w-100">
-    <p>Don't have an account? <a href="#" (click)="openRegisterModal()">Register</a></p>
+    <p>
+        {{ 'DONT_HAVE_AN_ACCOUNT' | translate }}
+        <a href="#" (click)="openRegisterModal()">{{ 'REGISTER' | translate }}</a>
+    </p>
 </div>
