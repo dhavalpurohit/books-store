@@ -1,8 +1,8 @@
 <footer class="footer text-center py-3 bg-light">
     <p class="mb-1">{{ 'COPYRIGHT' | translate }}</p>
     <div class="footer-links mt-2">
-        <a href="#" class="text-dark mx-2">{{ 'IMPRINT' | translate }}</a> |
-        <a href="#" class="text-dark mx-2">{{ 'DATA_PROTECTION' | translate }}</a> |
-        <a href="#" class="text-dark mx-2">{{ 'TERMS_AND_CONDITIONS' | translate }}</a>
+        <a (click)="openImprintModal()" class="text-dark mx-2">{{ 'IMPRINT' | translate }}</a> |
+        <a (click)="openDataProtectionModal()" class="text-dark mx-2">{{ 'DATA_PROTECTION' | translate }}</a> |
+        <a (click)="openTermsModal()" class="text-dark mx-2">{{ 'TERMS_AND_CONDITIONS' | translate }}</a>
     </div>
 </footer>

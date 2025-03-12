@@ -1,4 +1,5 @@
 {
+  "CURRENCY_SYMBOL": "CHF",
   "CONFIRM_ITEM_CONDITION": "I confirm that the item is in good used condition.",
   "COPYRIGHT": "© 2025 verkaufen",
   "DATA_PROTECTION": "data protection",
@@ -40,5 +41,5 @@
   "SOLD": "sold",
   "TERMS_AND_CONDITIONS": "Terms and Conditions",
   "TITLE": "buchverkaufen.ch",
-  "CONFIRM_ITEM_CONDITION ": "I confirm that the item is in good used condition."
+  "MYPROFILE": "My Profile"
 }

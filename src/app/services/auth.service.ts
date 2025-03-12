@@ -18,16 +18,16 @@ export class AuthService {
 
   constructor(public router: Router) {
     this.loadAuthState();
-   }
+  }
 
-   private loadAuthState() {
+  private loadAuthState() {
     const token = this.getToken();
     if (token) {
       this.authToken = token;
       this.isLoggedInSubject.next(true);
     }
   }
-  
+
   checkAuth() {
     const authToken = this.getToken();
     if (authToken)
@@ -49,12 +49,6 @@ export class AuthService {
     this.router.navigate(["/"]); // Redirect after login
   }
 
-  // getToken(): string | null {
-  //   if (this.authToken)
-  //     return this.authToken;
-  //   else
-  //     return this.getLocalStorageData(LOCAL_STORAGE.userToken, "string");
-  // }
   getToken(): string | null {
     if (this.authToken) {
       return this.authToken;
@@ -65,23 +59,17 @@ export class AuthService {
     }
   }
 
-  // setLocalStorageData(itemName: any, itemValue: any) {
-  //   if (itemValue != "" || itemValue != null)
-  //     localStorage.setItem(itemName, itemValue);
-  // }
-
   setLocalStorageData(itemName: any, itemValue: any) {
     if (itemValue !== "" && itemValue !== null) {  // Fix condition
       localStorage.setItem(itemName, itemValue);
     }
   }
-  
+
   getLocalStorageData(itemName: any, dataType: any): string | null {
     let itemValue: any = null;
-    itemValue = localStorage.getItem(itemName)
-      ? localStorage.getItem(itemName)
-      : null;
-    if (dataType === "json") itemValue = JSON.parse(itemValue);
+    itemValue = localStorage.getItem(itemName) ? localStorage.getItem(itemName) : null;
+    if (dataType === "json")
+      itemValue = JSON.parse(itemValue);
 
     return itemValue != "" ? itemValue : null;
   }

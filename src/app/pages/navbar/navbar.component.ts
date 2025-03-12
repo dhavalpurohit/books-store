@@ -5,6 +5,8 @@ import { LoginModalComponent } from "../login-modal/login-modal.component";
 import { CommonModule } from "@angular/common";
 import { AuthService } from "../../services/auth.service";
 import { defaultLang, languages } from "../../config";
+import { Router } from '@angular/router';
+import { ToastService } from '../../services/toast-service';
 
 @Component({
   selector: "app-navbar",
@@ -24,6 +26,8 @@ export class NavbarComponent {
     private renderer: Renderer2,
     private modalService: NgbModal,
     public authService: AuthService,
+    private router: Router,
+    private toastService: ToastService
   ) {
     const langCode = languages.map(x => x.code);
     this.translate.addLangs(langCode); // Add supported languages
@@ -49,5 +53,14 @@ export class NavbarComponent {
       centered: true, // Center the modal
       backdrop: "static", // Prevent closing when clicking outside
     });
+  }
+
+  goToProfile() {
+    this.router.navigate(['/profile']); // Replace 'profile' with your actual route
+  }
+
+  logOut() {
+     this.authService.logout()
+     this.toastService.success('Logout Successful!');
   }
 }

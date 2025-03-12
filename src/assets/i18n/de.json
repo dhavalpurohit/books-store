@@ -1,4 +1,5 @@
 {
+  "CURRENCY_SYMBOL": "CHF",
   "CONFIRM_ITEM_CONDITION": "Ich bestätige, dass sich der Artikel in einem guten gebrauchten Zustand befindet.",
   "COPYRIGHT": "© 2025 verkaufen",
   "DATA_PROTECTION": "datenschutz",
@@ -40,5 +41,5 @@
   "SOLD": "verkauft",
   "TERMS_AND_CONDITIONS": "AGB",
   "TITLE": "buchverkaufen.ch",
-  "CONFIRM_ITEM_CONDITION ": "Ich bestätige, dass sich der Artikel in einem guten gebrauchten Zustand befindet."
+  "MYPROFILE": "Maya-Profil"
 }

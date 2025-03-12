@@ -41,16 +41,17 @@
                     <div class="col-12 col-md-4 text-center">
                         <div class="p-3 shadow rounded bg-white">
                             <p class="mb-3 text-secondary">User Angebot</p>
-                            <h4 class="fw-bold">{{productDetail.price}}&euro;</h4>
+                            <h4 class="fw-bold">{{ productDetail.price }} {{ 'CURRENCY_SYMBOL' | translate }}</h4>
                         </div>
                         <div class="form-check my-4 text-start">
-                            <input class="form-check-input" type="checkbox" value="" id="confirmation_check">
+                            <input class="form-check-input" type="checkbox" value="" id="confirmation_check"
+                                [(ngModel)]="isConfirmed">
                             <label class="form-check-label" for="confirmation_check">
                                 {{ 'CONFIRM_ITEM_CONDITION' | translate }}
                             </label>
                         </div>
                         <button (click)="offerUpdate()" class="btn btn-warning  rounded-pill"
-                            style="min-width: max-content;">Aus Marktplze Löschen</button>
+                            style="min-width: max-content;" [disabled]="!isConfirmed">Aus Marktplze Löschen</button>
                     </div>
                 </div>
             </div>
@@ -179,42 +180,6 @@
             <div ngbAccordionCollapse>
                 <div ngbAccordionBody>
                     <ng-template>{{ 'FAQ_DESCRIPTION_4' | translate }}</ng-template>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="container sales_section" style="margin-top: 80px" *ngIf="offers?.length">
-    <h3 class="capitalize text-2xl font-semibold">{{ 'SALES_TITLE' | translate }}</h3>
-    <div class="mt-4">
-        <div class="card shadow-sm p-3 border rounded mb-4" *ngFor="let offer of offers">
-            <div class="row align-items-center">
-                <!-- Book Image -->
-                <div class="col-12 col-md-3 text-center">
-                    <!-- <img src="{{ offer.image }}" alt="Book Image" class="img-fluid rounded" /> -->
-                    <img [src]="offer.image || 'assets/book_not_found.jpg'" (error)="setDefaultImage($event)"
-                        alt="Book Image" class="img-fluid rounded" />
-                </div>
-
-                <!-- Book Details -->
-                <div class="col-12 col-md-6">
-                    <h5 class="fw-bold">{{ offer.title }}</h5>
-                    <p class="mb-1"><strong>Author:</strong>{{ offer.author }}</p>
-                    <p class="mb-1"><strong>ISBN:</strong>{{ offer.productId }}</p>
-                </div>
-
-                <!-- Price & Button -->
-                <div class="col-12 col-md-3 text-center">
-                    <div class="p-3 shadow rounded bg-white">
-                        <p class="mb-3 text-secondary">{{ 'OUR_PRICE' | translate }}</p>
-                        <h4 class="fw-bold">{{ offer.price }}&euro;</h4>
-                    </div>
-                    <button class="btn btn-warning mt-4" [ngClass]="{
-                        'sold_color': offer.state === 'sold',
-                        'deleted_color': offer.state === 'deleted',
-                        'marketplace_color': offer.state === 'marketplace'
-                    }">{{ offer.state }}</button>
                 </div>
             </div>
         </div>

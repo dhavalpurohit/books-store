@@ -21,6 +21,9 @@ export class APIService {
     } else if (type === NOTIFICATION_TYPE.ERROR) {
       messageObj.severity = "error";
       messageObj.summary = "Error";
+    } else if (type === NOTIFICATION_TYPE.WARNING) {
+      messageObj.severity = "warning";
+      messageObj.summary = "Warning";
     }
   }
 

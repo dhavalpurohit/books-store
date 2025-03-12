@@ -5,6 +5,7 @@ import { CommonModule } from "@angular/common";
 import { APIService } from "../../services/api.service";
 import { apiEndpoint } from "../../config";
 import { TranslateModule } from "@ngx-translate/core";
+import { ToastService } from '../../services/toast-service';
 
 @Component({
   selector: "app-home",
@@ -16,8 +17,9 @@ export class HomeComponent {
   public productId: string = "";
   public productDetail: any = {};
   public offers: any[] = [];
+  isConfirmed: boolean = false;
 
-  constructor(private apiService: APIService) { }
+  constructor(private apiService: APIService, private toastService: ToastService) { }
 
   ngOnInit() {
     this.getOffers();
@@ -26,7 +28,7 @@ export class HomeComponent {
   setDefaultImage(event: Event) {
     (event.target as HTMLImageElement).src = 'assets/book_not_found.jpg';
   }
-  
+
   getOffers() {
     this.apiService.httpGetRequest(apiEndpoint.OFFER_GET_ALL).then((res: any) => {
       console.log("res ", res);
@@ -58,18 +60,22 @@ export class HomeComponent {
   }
 
   offerUpdate() {
-    this.apiService.httpPostRequest(apiEndpoint.OFFER_UPDATE, {
-      gtin: `${this.productDetail?.id}`,
-      state: "marketplace",
-    }).then((res: any) => {
-      console.log("res ", res);
-      if (res?.statusCode == 200) {
-        this.getOffers();
-        this.productDetail = {};
-      }
-    }).catch((error: any) => {
-      console.error(error);
-      throw error;
-    });
+    if (this.isConfirmed) {
+      this.apiService.httpPostRequest(apiEndpoint.OFFER_UPDATE, {
+        gtin: `${this.productDetail?.id}`,
+        state: "marketplace",
+      }).then((res: any) => {
+        console.log("res ", res);
+        if (res?.statusCode == 200) {
+          this.toastService.success('Successfully updated offer.');
+          this.getOffers();
+          this.productDetail = {};
+        }
+      }).catch((error: any) => {
+        console.error(error);
+        this.toastService.error(error);
+        throw error;
+      });
+    }
   }
 }

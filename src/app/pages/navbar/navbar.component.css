@@ -18,3 +18,20 @@ i {
 .dropdown-toggle::after {
     display: none;
 }
+
+@media (max-width: 768px) {
+    .feature-section {
+        display: none;
+    }
+
+    .navbar-brand img {
+        width: 180px;
+    }
+
+    .dropdown-menu {
+        left: auto !important;
+        right: 0 !important;
+        width: 90% !important;
+        margin: auto !important;
+    }
+}
