@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ImprintModalComponent } from './imprint-modal.component';
 
 describe('ImprintModalComponent', () => {
@@ -9,8 +8,7 @@ describe('ImprintModalComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ImprintModalComponent]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ImprintModalComponent);
     component = fixture.componentInstance;

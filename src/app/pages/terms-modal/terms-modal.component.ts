@@ -11,9 +11,9 @@ import { CommonModule } from "@angular/common";
 })
 export class TermsModalComponent {
   constructor(
-     public activeModal: NgbActiveModal,
-   ) { }
- 
+    public activeModal: NgbActiveModal,
+  ) { }
+
   closeModal() {
     this.activeModal.dismiss();
   }

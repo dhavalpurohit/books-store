@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DataProtectionModalComponent } from './data-protection-modal.component';
 
 describe('DataProtectionModalComponent', () => {
@@ -9,8 +8,7 @@ describe('DataProtectionModalComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DataProtectionModalComponent]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DataProtectionModalComponent);
     component = fixture.componentInstance;

@@ -1,3 +1,79 @@
+<section class="container" style="margin-top: 80px">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex align-items-center ">
+                <h1 class="fs-2 fw-semibold">{{ 'WELCOME_MESSAGE' | translate }}</h1>
+                <div role="button" class="ms-5" (click)="logOut()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h7v2H5v14h7v2zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5z" />
+                    </svg>
+                    <span class="fw-semibold">{{ 'LOGOUT' | translate }}</span>
+                </div>
+            </div>
+
+            <h3 class="fs-5 fw-semibold mt-2">{{ 'PERSONAL_DATA' | translate }}</h3>
+        </div>
+    </div>
+    <form class="row g-3" (ngSubmit)="updateProfile()">
+        <div class="col-md-6">
+            <div class="row g-3">
+                <!-- First Name -->
+                <div class="col-12">
+                    <label for="first_name" class="form-label">{{ 'FIRST_NAME' | translate }}</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name"
+                        placeholder="{{ 'ENTER_VALUE' | translate }}" [(ngModel)]="first_name">
+                </div>
+
+                <!-- last Name -->
+                <div class="col-12">
+                    <label for="last_name" class="form-label">{{ 'LAST_NAME' | translate }}</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name"
+                        placeholder="{{ 'ENTER_VALUE' | translate }}" [(ngModel)]="last_name">
+                </div>
+
+                <!-- Bank Account -->
+                <div class="col-12">
+                    <label for="bank_account" class="form-label">{{ 'BANK_ACCOUTN_NUMBER' | translate }}</label>
+                    <input type="text" class="form-control" id="bank_account" name="bank_account"
+                        placeholder="{{ 'ENTER_VALUE' | translate }}" [(ngModel)]="bank_account">
+                </div>
+
+                <!--Ifsc -->
+                <div class="col-12">
+                    <label for="ifsc" class="form-label">{{ 'IFSC_CODE' | translate }}</label>
+                    <input type="text" class="form-control" id="ifsc" name="ifsc"
+                        placeholder="{{ 'ENTER_VALUE' | translate }}" [(ngModel)]="ifsc">
+                </div>
+
+                <!--city -->
+                <div class="col-12">
+                    <label for="city" class="form-label">{{ 'CITY' | translate }}</label>
+                    <input type="text" class="form-control" id="city" name="city"
+                        placeholder="{{ 'ENTER_VALUE' | translate }}" [(ngModel)]="city">
+                </div>
+
+                <!--postal code -->
+                <div class="col-12">
+                    <label for="postal_code" class="form-label">{{ 'POSTAL_CODE' | translate }}</label>
+                    <input type="text" class="form-control" id="postal_code" name="postal_code"
+                        placeholder="{{ 'ENTER_VALUE' | translate }}" [(ngModel)]="postal_code">
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Error Message -->
+        <!-- <div *ngIf="errorMessage" class="col-12">
+            <div class="alert alert-danger">{{ errorMessage }}</div>
+        </div> -->
+
+        <!-- Register Button -->
+        <div class="col-12 text-center">
+            <button type="submit" class="btn btn-dark px-4 py-2">{{ 'SUBMIT' | translate }}</button>
+        </div>
+    </form>
+</section>
 <section class="container sales_section" style="margin-top: 80px" *ngIf="offers?.length">
     <h3 class="capitalize text-2xl font-semibold">{{ 'SALES_TITLE' | translate }}</h3>
     <div class="mt-4">
@@ -13,21 +89,26 @@
                 <!-- Book Details -->
                 <div class="col-12 col-md-6">
                     <h5 class="fw-bold">{{ offer.title }}</h5>
-                    <p class="mb-1"><strong>Author:</strong>{{ offer.author }}</p>
-                    <p class="mb-1"><strong>ISBN:</strong>{{ offer.productId }}</p>
+                    <p class="mb-1"><strong>{{ 'AUTHOR' | translate }}:</strong> {{ offer.author }}</p>
+                    <p class="mb-1"><strong>{{ 'ISBN' | translate }}:</strong> {{ offer.productId }}</p>
                 </div>
 
                 <!-- Price & Button -->
                 <div class="col-12 col-md-3 text-center">
                     <div class="p-3 shadow rounded bg-white">
                         <p class="mb-3 text-secondary">{{ 'OUR_PRICE' | translate }}</p>
-                        <h4 class="fw-bold">{{ offer.price }} {{ 'CURRENCY_SYMBOL' | translate }}</h4>
+                        <h4 class="fw-bold">{{ offer.price | number: '1.2-2' }} {{ 'CURRENCY_SYMBOL' | translate }}</h4>
                     </div>
                     <button class="btn btn-warning mt-4" [ngClass]="{
                         'sold_color': offer.state === 'sold',
                         'deleted_color': offer.state === 'deleted',
                         'marketplace_color': offer.state === 'marketplace'
                     }">{{ offer.state }}</button>
+
+                    <button class="btn btn-warning mt-4 mx-2 deleted_color" *ngIf="offer.state === 'marketplace'"
+                        (click)="deleteOffer(offer.productId)">
+                        {{ 'DELETE' | translate }}
+                    </button>
                 </div>
             </div>
         </div>

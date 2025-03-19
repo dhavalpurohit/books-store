@@ -1,6 +1,6 @@
-import { Component, inject } from "@angular/core";
+import { Component } from "@angular/core";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { RegisterModalComponent } from "../register-modal/register-modal.component";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
@@ -18,9 +18,10 @@ export class LoginModalComponent {
   constructor(
     public activeModal: NgbActiveModal,
     private apiService: APIService,
-    private authService: AuthService, // Inject AuthService
+    private authService: AuthService,
     private modalService: NgbModal,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private translateService: TranslateService,
   ) { }
 
   email: string = "";
@@ -28,30 +29,27 @@ export class LoginModalComponent {
   errorMessage: string = "";
   showPassword: boolean = false;
 
-  onSubmit() {
+  async onSubmit() {
     if (!this.email || !this.password) {
-      this.errorMessage = "Please enter email and password.";
-      this.toastService.error(this.errorMessage);
+      this.errorMessage = await this.translateService.get("REQUIRED_EMAIL_PASSWORD").toPromise();
       return;
     }
 
     this.apiService.httpPostRequest(apiEndpoint.USER_LOGIN, {
       email: this.email, password: this.password
-    }).then((res: any) => {
-      console.log("Login Success:", res.payload.authToken);
-    
+    }).then(async (res: any) => {
       if (res?.payload?.authToken) {
         this.authService.setToken(res?.payload?.authToken);
-        this.toastService.success('Login Successful!');
+        this.toastService.successToast('LOGIN_SUCCESSFUL', true);
         this.closeModal();
       } else {
-        this.errorMessage = "Invalid login credentials.";
-        this.toastService.error(this.errorMessage);
+        this.errorMessage = await this.translateService.get("INVALID_CREDENTIAL").toPromise();
+        this.toastService.errorToast(this.errorMessage);
       }
-    }).catch((error) => {
+    }).catch(async (error) => {
       console.error("Login Error:", error);
-      this.errorMessage = "Login failed. Please check your credentials.";
-      this.toastService.error(this.errorMessage);
+      this.errorMessage = await this.translateService.get("LOGIN_FAILED").toPromise();
+      this.toastService.errorToast(this.errorMessage);
     });
   } 
 

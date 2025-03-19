@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,13 @@ import { Injectable } from '@angular/core';
 export class ToastService {
   toasts: any[] = [];
 
-  show(message: string, classname: string = 'bg-info text-light', delay: number = 5000) {
+  constructor(private translateService: TranslateService) {}
+
+  async show(message: string, translate: boolean, classname: string = 'bg-info text-light', delay: number = 3000) {
+    if (translate) {
+      message = await this.translateService.get(message).toPromise();
+    }
+
     this.toasts.push({ message, classname, delay });
   }
 
@@ -14,15 +21,15 @@ export class ToastService {
     this.toasts = this.toasts.filter(t => t !== toast);
   }
 
-  success(message: string) {
-    this.show(message, 'bg-success text-light');
+  successToast(message: string, translate: boolean = false) {
+    this.show(message, translate, 'bg-success text-light');
   }
 
-  error(message: string) {
-    this.show(message, 'bg-danger text-light');
+  errorToast(message: string, translate: boolean = false) {
+    this.show(message, translate, 'bg-danger text-light');
   }
 
-  warning(message: string) {
-    this.show(message, 'bg-warning text-dark');
+  warningToast(message: string, translate: boolean = false) {
+    this.show(message, translate, 'bg-warning text-dark');
   }
 }

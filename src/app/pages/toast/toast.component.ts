@@ -3,7 +3,6 @@ import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../services/toast-service';
 
-
 @Component({
   selector: 'app-toast',
   standalone: true,

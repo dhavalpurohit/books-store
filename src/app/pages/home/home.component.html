@@ -33,15 +33,15 @@
                     <!-- Book Details -->
                     <div class="col-12 col-md-5">
                         <h5 class="fw-bold">{{productDetail.title}}</h5>
-                        <p class="mb-1"><strong>Author:</strong>{{productDetail.author}}</p>
-                        <p class="mb-1"><strong>ISBN:</strong>{{productDetail.id}}</p>
+                        <p class="mb-1"><strong>{{ 'AUTHOR' | translate }}:</strong> {{productDetail.author}}</p>
+                        <p class="mb-1"><strong>{{ 'ISBN' | translate }}:</strong> {{productDetail.id}}</p>
                     </div>
 
                     <!-- Price & Button -->
                     <div class="col-12 col-md-4 text-center">
                         <div class="p-3 shadow rounded bg-white">
                             <p class="mb-3 text-secondary">User Angebot</p>
-                            <h4 class="fw-bold">{{ productDetail.price }} {{ 'CURRENCY_SYMBOL' | translate }}</h4>
+                            <h4 class="fw-bold">{{ productDetail.price | number: '1.2-2' }} {{ 'CURRENCY_SYMBOL' | translate }}</h4>
                         </div>
                         <div class="form-check my-4 text-start">
                             <input class="form-check-input" type="checkbox" value="" id="confirmation_check"
@@ -117,7 +117,7 @@
     </div>
 </section>
 
-<section class="container  mx-auto" style="margin-top: 80px;">
+<section class="container mx-auto" style="margin-top: 80px; margin-bottom: 50px;">
     <div ngbAccordion>
         <div ngbAccordionItem class="custom-accordion-item">
             <h2 ngbAccordionHeader class="custom-accordion-header">

@@ -1,12 +1,13 @@
 import { Component } from "@angular/core";
 import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { TranslateModule } from "@ngx-translate/core";
+import { TranslateModule, TranslateService } from "@ngx-translate/core";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { APIService } from "../../services/api.service";
 import { apiEndpoint } from "../../config";
 import { AuthService } from "../../services/auth.service";
 import { ToastService } from '../../services/toast-service';
+import { LoginModalComponent } from "../login-modal/login-modal.component";
 
 @Component({
   selector: "app-register-modal",
@@ -18,7 +19,9 @@ export class RegisterModalComponent {
     public activeModal: NgbActiveModal,
     private apiService: APIService,
     private authService: AuthService,
-    private toastService: ToastService
+    private modalService: NgbModal,
+    private toastService: ToastService,
+    private translateService: TranslateService,
   ) { }
 
   name: string = "";
@@ -30,7 +33,7 @@ export class RegisterModalComponent {
   onRegister() {
     if (!this.name || !this.email || !this.password) {
       this.errorMessage = "Please enter email and password.";
-      this.toastService.error(this.errorMessage);
+      this.toastService.errorToast(this.errorMessage);
       return;
     }
 
@@ -38,21 +41,19 @@ export class RegisterModalComponent {
       name: this.name,
       email: this.email,
       password: this.password
-    }).then((res: any) => {
-      console.log("Registration Successful:", res?.payload?.authToken);
-
+    }).then(async (res: any) => {
       if (res?.payload?.authToken) {
         this.authService.setToken(res?.payload?.authToken);
-        this.toastService.success("Registration Successful");
+        this.toastService.successToast('REGISTERED_SUCCESSFULLY', true);
         this.closeModal();
       } else {
-        this.errorMessage = "Invalid Registration credentials.";
-        this.toastService.error(this.errorMessage);
+        this.errorMessage = await this.translateService.get("REGISTRATION_FAILED").toPromise();
+        this.toastService.errorToast(this.errorMessage);
       }
-    }).catch((error: any) => {
+    }).catch(async (error: any) => {
       console.error("Registration Error:", error);
-      this.errorMessage = "Registration failed.";
-      this.toastService.error(this.errorMessage);
+      this.errorMessage = await this.translateService.get("REGISTRATION_FAILED").toPromise();
+      this.toastService.errorToast(this.errorMessage);
     }
     );
   }
@@ -63,5 +64,13 @@ export class RegisterModalComponent {
 
   closeModal() {
     this.activeModal.dismiss();
+  }
+
+  openLoginModal() {
+    this.closeModal();
+    this.modalService.open(LoginModalComponent, {
+      centered: true,
+      backdrop: "static",
+    });
   }
 }

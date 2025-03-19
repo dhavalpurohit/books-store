@@ -6,21 +6,17 @@ const config: any = {
 };
 
 const apiEndpoint: any = {
-  PRODUCT_GET: "product/get",
-  USER_REGISTER: "user/register",
-  USER_LOGIN: "user/login",
   OFFER_UPDATE: "offer/update",
   OFFER_GET_ALL: "offer/getAll",
+  PRODUCT_GET: "product/get",
+  PROFILE_GET: "profile/get",
+  PROFILE_UPDATE: "profile/update",
+  USER_REGISTER: "user/register",
+  USER_LOGIN: "user/login",
 };
 
 const LOCAL_STORAGE: any = {
   userToken: "userToken",
-};
-
-const NOTIFICATION_TYPE: any = {
-  WARNING: "warning",
-  ERROR: "error",
-  SUCCESS: "success",
 };
 
 const defaultLang = "en";
@@ -32,5 +28,5 @@ const languages = [
 export {
   config, apiEndpoint,
   defaultLang, languages,
-  LOCAL_STORAGE, NOTIFICATION_TYPE,
+  LOCAL_STORAGE
 };

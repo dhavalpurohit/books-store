@@ -31,9 +31,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <!-- Logo / Brand -->
-            <a class="navbar-brand fw-bold" href="#">
-                <img src="assets/logo_transparent.png" alt="logo">
-            </a>
+            <a class="navbar-brand fw-bold" href="#">{{ 'BOOKSTORE' | translate }}</a>
 
             <!-- Right-side icons -->
             <div class="d-flex align-items-center">
@@ -52,45 +50,19 @@
                                     stroke-width="1.5"
                                     d="M5 20v-1a7 7 0 0 1 7-7v0a7 7 0 0 1 7 7v1m-7-8a4 4 0 1 0 0-8a4 4 0 0 0 0 8" />
                             </svg>
-                            <span class="small">Mein Konto</span>
+                            <span class="small">{{ 'MAIN_ACCOUNT' | translate }}</span>
                         </button>
 
                         <div ngbDropdownMenu aria-labelledby="profileDropdown">
                             <button class="dropdown-item" (click)="goToProfile()">
-                                {{ 'MYPROFILE' | translate }}
+                                {{ 'MY_PROFILE' | translate }}
                             </button>
                             <button (click)="logOut()" class="dropdown-item ">
                                 {{ 'LOGOUT' | translate }}
                             </button>
-                            <!-- <ng-template #showLogin> -->
-                            <!-- <button (click)="openLoginModal()" class="dropdown-item btn btn-dark">
-                                {{ 'LOGIN' | translate }}
-                            </button> -->
-                            <!-- </ng-template> -->
                         </div>
                     </div>
                 </ng-template>
-
-                <!-- <div *ngIf="isLoggedIn; else showLogin" class="d-flex flex-column align-items-center mx-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="1.5"
-                            d="M5 20v-1a7 7 0 0 1 7-7v0a7 7 0 0 1 7 7v1m-7-8a4 4 0 1 0 0-8a4 4 0 0 0 0 8" />
-                    </svg>
-                    <span class="small">Mein Konto</span>
-                </div>
-
-               
-                <button *ngIf="isLoggedIn; else showLogin" (click)="authService.logout()"
-                    class="btn btn-danger px-4 py-2 mx-2">
-                    {{ 'LOGOUT' | translate }}
-                </button>
-                <ng-template #showLogin>
-                    <button (click)="openLoginModal()" class="btn btn-dark px-4 py-2 mx-2">
-                        {{ 'LOGIN' | translate }}
-                    </button>
-                </ng-template> -->
-
 
                 <!-- Language Selection -->
                 <div class="row">

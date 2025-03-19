@@ -49,7 +49,6 @@ html[dir="ltr"] .accordion-button::after {
     border-color: #FF0000;
 }
 
-
 .deleted_color:hover {
     background-color: #FF0000;
     border-color: #FF0000;

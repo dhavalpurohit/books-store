@@ -32,6 +32,11 @@ export class NavbarComponent {
     const langCode = languages.map(x => x.code);
     this.translate.addLangs(langCode); // Add supported languages
     this.translate.setDefaultLang(this.selectedLanguage); // Set default language
+
+    const browserLang: any = this.translate.getBrowserLang();
+    if(langCode.includes(browserLang)) {
+      this.selectedLanguage = browserLang;
+    }
     this.changeLanguage(this.selectedLanguage);
   }
 
@@ -39,7 +44,6 @@ export class NavbarComponent {
     this.authService.isLoggedIn$.subscribe((status) => {
       this.isLoggedIn = status;
     });
-    console.log("this.isLoggedIn : ", this.isLoggedIn);
   }
 
   changeLanguage(lang: string) {
@@ -61,6 +65,6 @@ export class NavbarComponent {
 
   logOut() {
      this.authService.logout()
-     this.toastService.success('Logout Successful!');
+     this.toastService.successToast('LOGOUT_SUCCESSFUL', true);
   }
 }

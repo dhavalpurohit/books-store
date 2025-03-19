@@ -42,7 +42,6 @@ export class AuthService {
   }
 
   setToken(token: string): void {
-    console.log("setToken", token);
     this.authToken = token;
     this.isLoggedInSubject.next(true);
     this.setLocalStorageData(LOCAL_STORAGE.userToken, token);
