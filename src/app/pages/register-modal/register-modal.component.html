@@ -4,11 +4,17 @@
 </div>
 <div class="modal-body">
     <form class="row g-3" (ngSubmit)="onRegister()">
-        <!-- Email -->
+        <!-- First Name -->
         <div class="col-12">
-            <label for="name" class="form-label">{{ 'NAME' | translate }}</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="{{ 'ENTER_NAME' | translate }}"
-                [(ngModel)]="name">
+            <label for="first_name" class="form-label">{{ 'FIRST_NAME' | translate }}</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="{{ 'ENTER_VALUE' | translate }}"
+                [(ngModel)]="first_name">
+        </div>
+
+        <div class="col-12">
+            <label for="last_name" class="form-label">{{ 'LAST_NAME' | translate }}</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="{{ 'ENTER_VALUE' | translate }}"
+                [(ngModel)]="last_name">
         </div>
 
         <!-- Email -->

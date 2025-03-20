@@ -24,21 +24,23 @@ export class RegisterModalComponent {
     private translateService: TranslateService,
   ) { }
 
-  name: string = "";
-  email: string = "";
-  password: string = "";
-  errorMessage: string = "";
-  showPassword: boolean = false;
+  public first_name: string = "";
+  public last_name: string = "";
+  public email: string = "";
+  public password: string = "";
+  public errorMessage: string = "";
+  public showPassword: boolean = false;
 
   onRegister() {
-    if (!this.name || !this.email || !this.password) {
+    if (!this.first_name || !this.last_name || !this.email || !this.password) {
       this.errorMessage = "Please enter email and password.";
       this.toastService.errorToast(this.errorMessage);
       return;
     }
 
     this.apiService.httpPostRequest(apiEndpoint.USER_REGISTER, {
-      name: this.name,
+      first_name: this.first_name,
+      last_name: this.last_name,
       email: this.email,
       password: this.password
     }).then(async (res: any) => {

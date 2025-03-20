@@ -16,18 +16,17 @@ import { AuthService } from "../../services/auth.service";
 })
 export class ProfileComponent {
 
-  constructor(private apiService: APIService, private toastService: ToastService,     public authService: AuthService) { }
+  constructor(private apiService: APIService, private toastService: ToastService, public authService: AuthService) { }
 
   public offers: any[] = [];
   public userDetail: any = {};
-  
-  first_name: string = ""; 
-  last_name: string = ""; 
-  bank_account: string = ""; 
-  ifsc: string = ""; 
-  city: string = ""; 
-  postal_code: string = ""; 
-  
+
+  first_name: string = "";
+  last_name: string = "";
+  bank_account: string = "";
+  city: string = "";
+  postal_code: string = "";
+
   ngOnInit() {
     this.getOffers();
     this.getProfile();
@@ -45,7 +44,6 @@ export class ProfileComponent {
         this.first_name = this.userDetail.first_name || "";
         this.last_name = this.userDetail.last_name || "";
         this.bank_account = this.userDetail.bank_account || "";
-        this.ifsc = this.userDetail.ifsc || "";
         this.city = this.userDetail.city || "";
         this.postal_code = this.userDetail.postal_code || "";
 
@@ -62,7 +60,6 @@ export class ProfileComponent {
       first_name: this.first_name,
       last_name: this.last_name,
       bank_account: this.bank_account,
-      ifsc: this.ifsc,
       city: this.city,
       postal_code: this.postal_code
     };
@@ -71,7 +68,6 @@ export class ProfileComponent {
       if (res?.statusCode == 200) {
         this.toastService.successToast('PROFILE_UPDATED_SUCCESSFULLY', true);
         this.getProfile();
-        this.getOffers();
       }
     }).catch((error: any) => {
       console.error(error);
@@ -89,6 +85,12 @@ export class ProfileComponent {
       console.error(error);
       throw error;
     });
+  }
+
+  updateOffer(offer: any) {
+    if(offer?.state == 'marketplace' && offer?.productId) {
+      this.deleteOffer(offer?.productId);
+    }
   }
 
   deleteOffer(productId: any) {
@@ -110,5 +112,5 @@ export class ProfileComponent {
   logOut() {
     this.authService.logout()
     this.toastService.successToast('LOGOUT_SUCCESSFUL', true);
- }
+  }
 }
